@@ -61,6 +61,20 @@ const delAccount = async (account_id: number) => {
         console.warn("delete failed");
     await respond_accounts.refresh();
 }
+// GPT query
+
+const gpt_instruct = ref("餐饮category总开支是多少");
+const gpt_respond = ref("");
+const gpt_query = async () => {
+
+    console.log("gpt_query")
+    const resp = await $fetch(("/api/gptQuery"), {
+        method: "POST",
+        body: JSON.stringify({ instruct: gpt_instruct.value }),
+    });
+    gpt_respond.value = resp;
+}
+
 </script>
 <template>
     <v-container>
@@ -129,12 +143,17 @@ const delAccount = async (account_id: number) => {
                 </v-card>
             </v-col>
         </v-row>
-        <!-- <v-row>
+        <v-row>
             <v-col>
                 <v-card>
                     <v-card-title> GPT 查询</v-card-title>
+                    <v-card-text>
+                        <v-text-field v-model="gpt_instruct"></v-text-field>
+                        <v-text-field v-model="gpt_respond" variant="outlined"></v-text-field>
+                        <v-btn block variant="tonal" @click="gpt_query">查询</v-btn>
+                    </v-card-text>
                 </v-card>
             </v-col>
-        </v-row> -->
+        </v-row>
     </v-container>
 </template>
