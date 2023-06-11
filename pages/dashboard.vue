@@ -63,7 +63,7 @@ const delAccount = async (account_id: number) => {
 }
 // GPT query
 
-const gpt_instruct = ref("餐饮category总开支是多少");
+const gpt_instruct = ref("What is the most significant change in the account 理财, show me its value and comment");
 const gpt_respond = ref("");
 const gpt_query = async () => {
 
@@ -149,7 +149,7 @@ const gpt_query = async () => {
                     <v-card-title> GPT 查询</v-card-title>
                     <v-card-text>
                         <v-text-field v-model="gpt_instruct"></v-text-field>
-                        <v-text-field v-model="gpt_respond" variant="outlined"></v-text-field>
+                        <v-text-field v-model="gpt_respond" variant="outlined" readonly></v-text-field>
                         <v-btn block variant="tonal" @click="gpt_query">查询</v-btn>
                     </v-card-text>
                 </v-card>
